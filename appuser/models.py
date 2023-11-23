@@ -38,6 +38,14 @@ class AppUserManager(BaseUserManager):
 
 
 class AppUser(AbstractUser):
+    ROLE_CHOICES = (
+        ("admin", "Admin"),
+        ("user", "User"),
+        ("company", "Company"),
+        ("employee", "Employee"),
+    )
+
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="user")
     username = None
     user_id = models.UUIDField(default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
